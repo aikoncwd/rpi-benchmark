@@ -1,2 +1,0 @@
-# rpi-benchmark
-1
