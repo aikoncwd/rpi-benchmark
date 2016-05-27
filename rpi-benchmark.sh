@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ "$(whoami)" == "root" ] || { echo "Must be run as root!"; exit 1; }
+[ "$(whoami)" == "root" ] || { echo "Must be run as sudo!"; exit 1; }
 
 # Install dependencies
 if [ ! `which hdparm` ]; then
@@ -50,14 +50,14 @@ printf "    "
 vcgencmd measure_temp
 printf "\n"
 
-printf "Running SD WRITE test...\n"
+printf "Running DD WRITE test...\n"
 printf "    "
 rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=512 conv=fsync 2>&1 | grep -v records
 printf "    "
 vcgencmd measure_temp
 printf "\n"
 
-printf "Running SD READ test...\n"
+printf "Running DD READ test...\n"
 printf "    "
 echo 3 > /proc/sys/vm/drop_caches && sync && dd if=~/test.tmp of=/dev/null bs=1M 2>&1 | grep -v records
 printf "    "
@@ -65,4 +65,4 @@ vcgencmd measure_temp
 rm -f ~/test.tmp
 printf "\n\n"
 
-printf "AikonCWD's rpi-benchmark completed!\n\n"
+printf "AikonCWD's rpi-benchmark completed!\n"
