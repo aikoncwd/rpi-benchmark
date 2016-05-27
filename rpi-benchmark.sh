@@ -27,28 +27,42 @@ printf "\n\n"
 
 printf "Running CPU test...\n"
 sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep "total time:"
+printf "    "
+vcgencmd measure_temp
 printf "\n"
 
 printf "Running MEMORY test...\n"
 sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --memory-total-size=3G --memory-access-mode=seq run | grep "total time:"
+printf "    "
+vcgencmd measure_temp
 printf "\n"
 
 printf "Running THREADS test...\n"
 sysbench --num-threads=4 --validate=on --test=threads --thread-yields=3000 run | grep "total time:"
+printf "    "
+vcgencmd measure_temp
 printf "\n"
 
 printf "Running HDPARM test...\n"
+printf "   "
 hdparm -t /dev/mmcblk0 | grep Timing
+printf "    "
+vcgencmd measure_temp
 printf "\n"
 
 printf "Running SD WRITE test...\n"
+printf "    "
 rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=512 conv=fsync 2>&1 | grep -v records
+printf "    "
+vcgencmd measure_temp
 printf "\n"
 
 printf "Running SD READ test...\n"
+printf "    "
 echo 3 > /proc/sys/vm/drop_caches && sync && dd if=~/test.tmp of=/dev/null bs=1M 2>&1 | grep -v records
+printf "    "
+vcgencmd measure_temp
 rm -f ~/test.tmp
 printf "\n\n"
 
-vcgencmd measure_temp
 printf "AikonCWD's rpi-benchmark completed!\n\n"
