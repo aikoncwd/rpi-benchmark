@@ -9,6 +9,9 @@ fi
 if [ ! `which sysbench` ]; then
   apt-get install -y sysbench
 fi
+if [ ! `which speedtest-cli` ]; then
+  apt-get install -y speedtest-cli
+fi
 
 # Script start!
 clear
@@ -24,6 +27,11 @@ vcgencmd get_config int | grep sdram_freq
 printf "microsd_clock="
 grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
 printf "\n\n"
+
+printf "Running InternetSpeed test...\n"
+printf "    "
+speedtest-cli --simple
+printf "\n"
 
 printf "Running CPU test...\n"
 sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep "total time:"
