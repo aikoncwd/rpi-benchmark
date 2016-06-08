@@ -18,7 +18,7 @@ clear
 sync
 echo -e "Raspberry Pi Benchmark Test"
 echo -e "Author: AikonCWD"
-echo -e "Version: 2.0\n"
+echo -e "Version: 2.0\n\e[94m"
 
 # Show current hardware
 vcgencmd measure_temp
@@ -28,7 +28,7 @@ vcgencmd get_config int | grep sdram_freq
 vcgencmd get_config int | grep gpu_freq
 printf "sd_clock="
 grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
-echo -e "\n"
+echo -e "\n\e[0m"
 
 echo -e "Running InternetSpeed test...\e[93m"
 speedtest-cli --simple
@@ -36,31 +36,31 @@ echo -e "\e[0m"
 
 echo -e "Running CPU test...\e[93m"
 sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
-echo -e "\n"
+echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running THREADS test...\e[93m"
 sysbench --num-threads=4 --validate=on --test=threads --thread-yields=4000 --thread-locks=4 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
-echo -e "\n"
+echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running MEMORY test...\e[93m"
 sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --memory-total-size=3G --memory-access-mode=seq run | grep 'Operations\|transferred\|total time:\|min:\|avg:\|max:' | tr -s [:space:]
-echo -e "\n"
+echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running HDPARM test...\e[93m"
 hdparm -t /dev/mmcblk0 | grep Timing
-echo -e "\n"
+echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running DD WRITE test...\e[93m"
 rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=512 conv=fsync 2>&1 | grep -v records
-echo -e "\n"
+echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
@@ -71,4 +71,4 @@ vcgencmd measure_temp
 rm -f ~/test.tmp
 echo -e "\e[0m"
 
-echo -e "\e[92mAikonCWD's rpi-benchmark completed!\e[0m\n"
+echo -e "\e[96mAikonCWD's rpi-benchmark completed!\e[0m\n"
