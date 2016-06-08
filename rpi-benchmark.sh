@@ -35,7 +35,7 @@ echo -e "Running InternetSpeed test...\e[93m"
 echo -e "\e[0m"
 
 echo -e "Running CPU test...\e[93m"
-sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=500 run | grep "total time:"
+sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=500 run | grep -A1 "total time:"
 vcgencmd measure_temp
 echo -e "\e[0m"
 
