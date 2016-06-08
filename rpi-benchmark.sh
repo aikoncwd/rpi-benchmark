@@ -31,7 +31,7 @@ fi
 # Script start!
 clear
 sync
-echo -e "Raspberry Pi Benchmark Test"
+echo -e "\e[96mRaspberry Pi Benchmark Test"
 echo -e "Author: AikonCWD"
 echo -e "Version: 2.0\n\e[97m"
 
