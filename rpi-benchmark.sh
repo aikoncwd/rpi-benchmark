@@ -2,6 +2,7 @@
 
 [ "$(whoami)" == "root" ] || { echo "Must be run as sudo!"; exit 1; }
 
+# Internal functions
 spinner()
 {
   local pid=$1
