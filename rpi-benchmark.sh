@@ -35,17 +35,17 @@ echo -e "Running InternetSpeed test...\e[93m"
 echo -e "\e[0m"
 
 echo -e "Running CPU test...\e[93m"
-sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=500 run | grep -A1 "total time:"
-vcgencmd measure_temp
-echo -e "\e[0m"
-
-echo -e "Running MEMORY test...\e[93m"
-sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --memory-total-size=1G --memory-access-mode=seq run | grep "total time:"
+sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running THREADS test...\e[93m"
-sysbench --num-threads=4 --validate=on --test=threads --thread-yields=300 run | grep "total time:"
+sysbench --num-threads=4 --validate=on --test=threads --thread-yields=4000 --thread-locks=4 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
+vcgencmd measure_temp
+echo -e "\e[0m"
+
+echo -e "Running MEMORY test...\e[93m"
+sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --memory-total-size=3G --memory-access-mode=seq run | grep 'Operations\|transferred\|total time:\|min:\|avg:\|max:' | tr -s [:space:]
 vcgencmd measure_temp
 echo -e "\e[0m"
 
@@ -55,7 +55,7 @@ vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running DD WRITE test...\e[93m"
-#rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=5 conv=fsync 2>&1 | grep -v records
+#rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=512 conv=fsync 2>&1 | grep -v records
 vcgencmd measure_temp
 echo -e "\e[0m"
 
