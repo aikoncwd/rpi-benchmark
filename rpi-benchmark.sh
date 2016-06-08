@@ -16,25 +16,24 @@ fi
 # Script start!
 clear
 sync
-echo "Raspberry Pi Benchmark Test\n"
-echo "Author: AikonCWD\n"
-echo "Version: 2.0\n\n"
+echo -e "Raspberry Pi Benchmark Test"
+echo -e "Author: AikonCWD"
+echo -e "Version: 2.0\n"
 
 # Show current hardware
-echo -e "\e[31m"
 vcgencmd measure_temp
 vcgencmd get_config int | grep arm_freq
 vcgencmd get_config int | grep core_freq
 vcgencmd get_config int | grep sdram_freq
 vcgencmd get_config int | grep gpu_freq
 echo "microsd_clock="
-grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{echo("%0.3f MHz", $3/1000000)}'
+grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
 echo "\n\n"
 
 echo "Running InternetSpeed test...\n"
-echo "    "
+echo -e "\e[93m"
 speedtest-cli --simple
-echo "\n"
+echo -e "\e[0m"
 
 echo "Running CPU test...\n"
 sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=500 run | grep "total time:"
