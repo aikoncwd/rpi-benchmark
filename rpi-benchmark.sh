@@ -2,6 +2,21 @@
 
 [ "$(whoami)" == "root" ] || { echo "Must be run as sudo!"; exit 1; }
 
+spinner()
+{
+  local pid=$1
+  local delay=0.50
+  local spinstr='/-\|'
+  while [ "$(ps a | awk '{print $1}' | grep "$pid")" ]; do
+	  local temp=${spinstr#?}
+    printf " [%c]  " "$spinstr"
+    local spinstr=$temp${spinstr%"$temp"}
+    sleep $delay
+    printf "\b\b\b\b\b\b"
+  done
+  printf "    \b\b\b\b"
+}
+
 # Install dependencies
 if [ ! `which hdparm` ]; then
   apt-get install -y hdparm
@@ -31,7 +46,7 @@ grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f
 echo -e "\n\e[0m"
 
 echo -e "Running InternetSpeed test...\e[93m"
-speedtest-cli --simple
+speedtest-cli --simple & spinner $!
 echo -e "\e[0m"
 
 echo -e "Running CPU test...\e[93m"
