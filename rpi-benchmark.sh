@@ -18,7 +18,7 @@ clear
 sync
 echo -e "Raspberry Pi Benchmark Test"
 echo -e "Author: AikonCWD"
-echo -e "Version: 2.0\n\e[94m"
+echo -e "Version: 2.0\n\e[97m"
 
 # Show current hardware
 vcgencmd measure_temp
@@ -54,21 +54,18 @@ echo -e "\e[0m"
 
 echo -e "Running HDPARM test...\e[93m"
 hdparm -t /dev/mmcblk0 | grep Timing
-echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running DD WRITE test...\e[93m"
 rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=512 conv=fsync 2>&1 | grep -v records
-echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running DD READ test...\e[93m"
 echo -e 3 > /proc/sys/vm/drop_caches && sync && dd if=~/test.tmp of=/dev/null bs=1M 2>&1 | grep -v records
-echo -e "\n"
 vcgencmd measure_temp
 rm -f ~/test.tmp
 echo -e "\e[0m"
 
-echo -e "\e[96mAikonCWD's rpi-benchmark completed!\e[0m\n"
+echo -e "\e[91mAikonCWD's rpi-benchmark completed!\e[0m\n"
