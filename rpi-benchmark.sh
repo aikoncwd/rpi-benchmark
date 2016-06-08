@@ -16,61 +16,64 @@ fi
 # Script start!
 clear
 sync
-printf "Raspberry Pi Benchmark Test\n"
-printf "Author: AikonCWD\n\n"
+echo "Raspberry Pi Benchmark Test\n"
+echo "Author: AikonCWD\n"
+echo "Version: 2.0\n\n"
 
 # Show current hardware
+echo -e "\e[31m"
 vcgencmd measure_temp
 vcgencmd get_config int | grep arm_freq
 vcgencmd get_config int | grep core_freq
 vcgencmd get_config int | grep sdram_freq
-printf "microsd_clock="
-grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
-printf "\n\n"
+vcgencmd get_config int | grep gpu_freq
+echo "microsd_clock="
+grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{echo("%0.3f MHz", $3/1000000)}'
+echo "\n\n"
 
-printf "Running InternetSpeed test...\n"
-printf "    "
+echo "Running InternetSpeed test...\n"
+echo "    "
 speedtest-cli --simple
-printf "\n"
+echo "\n"
 
-printf "Running CPU test...\n"
-sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep "total time:"
-printf "    "
+echo "Running CPU test...\n"
+sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=500 run | grep "total time:"
+echo "    "
 vcgencmd measure_temp
-printf "\n"
+echo "\n"
 
-printf "Running MEMORY test...\n"
-sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --memory-total-size=3G --memory-access-mode=seq run | grep "total time:"
-printf "    "
+echo "Running MEMORY test...\n"
+sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --memory-total-size=1G --memory-access-mode=seq run | grep "total time:"
+echo "    "
 vcgencmd measure_temp
-printf "\n"
+echo "\n"
 
-printf "Running THREADS test...\n"
-sysbench --num-threads=4 --validate=on --test=threads --thread-yields=3000 run | grep "total time:"
-printf "    "
+echo "Running THREADS test...\n"
+sysbench --num-threads=4 --validate=on --test=threads --thread-yields=300 run | grep "total time:"
+echo "    "
 vcgencmd measure_temp
-printf "\n"
+echo "\n"
 
-printf "Running HDPARM test...\n"
-printf "   "
+echo "Running HDPARM test...\n"
+echo "   "
 hdparm -t /dev/mmcblk0 | grep Timing
-printf "    "
+echo "    "
 vcgencmd measure_temp
-printf "\n"
+echo "\n"
 
-printf "Running DD WRITE test...\n"
-printf "    "
-rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=512 conv=fsync 2>&1 | grep -v records
-printf "    "
+echo "Running DD WRITE test...\n"
+echo "    "
+rm -f ~/test.tmp && sync && dd if=/dev/zero of=~/test.tmp bs=1M count=5 conv=fsync 2>&1 | grep -v records
+echo "    "
 vcgencmd measure_temp
-printf "\n"
+echo "\n"
 
-printf "Running DD READ test...\n"
-printf "    "
+echo "Running DD READ test...\n"
+echo "    "
 echo 3 > /proc/sys/vm/drop_caches && sync && dd if=~/test.tmp of=/dev/null bs=1M 2>&1 | grep -v records
-printf "    "
+echo "    "
 vcgencmd measure_temp
 rm -f ~/test.tmp
-printf "\n\n"
+echo "\n\n"
 
-printf "AikonCWD's rpi-benchmark completed!\n"
+echo "AikonCWD's rpi-benchmark completed!\n"
