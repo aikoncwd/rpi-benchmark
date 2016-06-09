@@ -1,11 +1,10 @@
 # Raspberry Pi Benchmark
 
-<p align="center"><img src="https://i.imgur.com/rgrumzQ.png">
+<p align="center"><img src="https://i.imgur.com/rgrumzQ.png"></p>
 
 Copy and paste the following command in your Raspberry Pi console:
 
      curl -L http://bit.ly/1Vm2eHP | sudo bash
-</p>
 
 ## Information
 
