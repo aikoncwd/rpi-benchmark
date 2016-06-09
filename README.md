@@ -2,6 +2,11 @@
 
 ![rpi-benchmark screenshot](https://i.imgur.com/rgrumzQ.png)
 
+Copy and paste the following command in your Raspberry Pi console:
+
+     curl -L http://bit.ly/1Vm2eHP | sudo bash
+
+
 ## Information
 
 This script runs 7 benchmark tests to stress your Raspberry Pi hardware:
@@ -18,6 +23,8 @@ This script runs 7 benchmark tests to stress your Raspberry Pi hardware:
 Rpi-benchmark script will show your current hardware (overclock) settings. After every test, it will show the current CPU temperature
 
 
+
+
 ## Usage
 
 You don't need to download any program, compile sources, etc... It's so easy!  
@@ -26,6 +33,8 @@ Just copy and paste the following command in your Raspberry Pi console:
      curl -L http://bit.ly/1Vm2eHP | sudo bash
 
 The rpi-benchmark script will start in 2 seconds :relaxed:
+
+
 
 
 ### I want better results, can I overclock my RPi?
@@ -73,17 +82,11 @@ Edit your `/boot/config.txt` file and paste the following code, you can adjust v
 
 Edit your `/boot/config.txt` file and paste the following code, you can adjust values to get more or less overclock:
 
-    ########################################
-    # GPU MEMORY : Max stable memory alloc #
-    ########################################
     gpu_mem=256
     gpu_mem_256=128
     gpu_mem_512=256
     gpu_mem_1024=256
     
-    ########################################
-    # CPU OVERCLOCK : Max stable overclock #
-    ########################################
     arm_freq=1100
     core_freq=550
     sdram_freq=483
@@ -93,9 +96,6 @@ Edit your `/boot/config.txt` file and paste the following code, you can adjust v
     force_turbo=0
     initial_turbo=60
     
-    ########################################
-    # HDMI CONFIG : Force HDMI output      #
-    ########################################
     hdmi_drive=2
     hdmi_ignore_cec=0
     hdmi_ignore_cec_init=1
@@ -110,9 +110,6 @@ Edit your `/boot/config.txt` file and paste the following code, you can adjust v
     #overscan_top=29
     #overscan_bottom=25
     
-    ########################################
-    # MISC CONFIG : SPI, USB, Sound        #
-    ########################################
     max_usb_current=1
     dtparam=audio=on
     dtparam=spi=on
