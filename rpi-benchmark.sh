@@ -42,7 +42,9 @@ grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f
 echo -e "\n\e[0m"
 
 echo -e "Running InternetSpeed test...\e[93m"
-speedtest-cli --simple & spinner $!
+spinner &
+speedtest-cli --simple
+kill "$!" && printf "\b"
 echo -e "\e[0m"
 
 echo -e "Running CPU test...\e[93m"
