@@ -57,7 +57,7 @@ vcgencmd measure_temp
 echo -e "\e[0m"
 
 echo -e "Running THREADS test...\e[93m"
-sysbench --num-threads=4 --validate=on --test=threads --thread-yields=4000 --thread-locks=5 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:] & spinner $!
+sysbench --num-threads=4 --validate=on --test=threads --thread-yields=4000 --thread-locks=6 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:] & spinner $!
 echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
