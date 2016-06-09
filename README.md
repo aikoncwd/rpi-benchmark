@@ -1,5 +1,14 @@
 # Raspberry Pi Benchmark
 
+<p align="center">
+  <b>Some Links:</b><br>
+  <a href="#">Link 1</a> |
+  <a href="#">Link 2</a> |
+  <a href="#">Link 3</a>
+  <br><br>
+  <img src="http://s.4cdn.org/image/title/105.gif">
+</p>
+
 <img align="center" src="https://i.imgur.com/rgrumzQ.png">
 
 Copy and paste the following command in your Raspberry Pi console:
