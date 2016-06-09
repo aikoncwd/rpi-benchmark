@@ -1,6 +1,6 @@
 # Raspberry Pi Benchmark
 
-![rpi-benchmark screenshot](https://i.imgur.com/rgrumzQ.png)
+->![rpi-benchmark screenshot](https://i.imgur.com/rgrumzQ.png)<-
 
 Copy and paste the following command in your Raspberry Pi console:
 
