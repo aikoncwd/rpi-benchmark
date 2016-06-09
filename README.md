@@ -20,10 +20,8 @@ This script runs 7 benchmark tests to stress your Raspberry Pi hardware:
 
 
 Rpi-benchmark script will show your current hardware (overclock) settings. After every test, it will show the current CPU temperature
-
-
-
-
+<br>
+<br>
 ## Usage
 
 You don't need to download any program, compile sources, etc... It's so easy!  
@@ -32,18 +30,16 @@ Just copy and paste the following command in your Raspberry Pi console:
      curl -L http://bit.ly/1Vm2eHP | sudo bash
 
 The rpi-benchmark script will start in 2 seconds :relaxed:
-
-
-
-
+<br>
+<br>
 ### I want better results, can I overclock my RPi?
 
 Yes, overclocking your RPi will give you more power for your **CPU calculations**, more speed while read/write into your **memory ram** and better speeds while read/write into your microSD card.  
 If you use your RPi as a MediaCenter with Kodi or to play games with RetroPie, you will find a nice perfomance boost.
 
 I strongly recommend to use some cooling on your RPi to avoid CPU throttling (at 85ºC)
-
-
+<br>
+<br>
 ##### Raspberry Pi 3: Overclock settings
 
 Edit your `/boot/config.txt` file and paste the following code, you can adjust values to get more or less overclock:
@@ -75,8 +71,8 @@ Edit your `/boot/config.txt` file and paste the following code, you can adjust v
     
     start_x=1                       #Enable software decoding (MPEG-2, VC-1, VP6, VP8, Theora, etc)
     overscan_scale=1                #Respect the overscan settings with the use of an LCD display
-
-
+<br>
+<br>
 ##### Raspberry Pi 2: Overclock settings
 
 Edit your `/boot/config.txt` file and paste the following code, you can adjust values to get more or less overclock:
