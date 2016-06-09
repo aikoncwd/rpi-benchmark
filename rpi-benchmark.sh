@@ -3,19 +3,14 @@
 [ "$(whoami)" == "root" ] || { echo "Must be run as sudo!"; exit 1; }
 
 # Internal functions
-spinner()
-{
-  local pid=$1
-  local delay=0.50
-  local spinstr='/-\|'
-  while [ "$(ps a | awk '{print $1}' | grep "$pid")" ]; do
-	  local temp=${spinstr#?}
-    printf " [%c]  " "$spinstr"
-    local spinstr=$temp${spinstr%"$temp"}
-    sleep $delay
-    printf "\b\b\b\b\b\b"
-  done
-  printf "    \b\b\b\b"
+spinner() {
+    local i sp n
+    sp="/-\|"
+    n=${#sp}
+    printf " "
+    while sleep 0.1; do
+        printf "%s\b" "${sp:i++%n:1}"
+    done
 }
 
 # Install dependencies
@@ -51,7 +46,9 @@ speedtest-cli --simple & spinner $!
 echo -e "\e[0m"
 
 echo -e "Running CPU test...\e[93m"
-sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:] & spinner $!
+spinner &
+sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
+kill "$!" && printf "\b"
 echo -e ""
 vcgencmd measure_temp
 echo -e "\e[0m"
