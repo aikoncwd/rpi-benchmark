@@ -2,10 +2,10 @@
 
 <p align="center"><img src="https://i.imgur.com/rgrumzQ.png"></p>
 
-<p align="center">Copy and paste the following command in your Raspberry Pi console:
+<p align="center">Copy and paste the following command in your Raspberry Pi console:</p>
 
      curl -L http://bit.ly/1Vm2eHP | sudo bash
-</p>
+
 ## Information
 
 This script runs 7 benchmark tests to stress your Raspberry Pi hardware:
