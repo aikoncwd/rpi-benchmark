@@ -32,6 +32,8 @@ Just copy and paste the following command in your Raspberry Pi console:
 The rpi-benchmark script will start in 2 seconds :relaxed:
 <br>
 <br>
+<br>
+## Overclocking
 ### I want better results, can I overclock my RPi?
 
 Yes, overclocking your RPi will give you more power for your **CPU calculations**, more speed while read/write into your **memory ram** and better speeds while read/write into your microSD card.  
@@ -71,7 +73,6 @@ Edit your `/boot/config.txt` file and paste the following code, you can adjust v
     
     start_x=1                       #Enable software decoding (MPEG-2, VC-1, VP6, VP8, Theora, etc)
     overscan_scale=1                #Respect the overscan settings with the use of an LCD display
-<br>
 <br>
 ##### Raspberry Pi 2: Overclock settings
 
