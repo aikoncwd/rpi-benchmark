@@ -20,4 +20,4 @@ Rpi-benchmark script will show your current hardware (overclock) settings. After
 
 Copy and paste the following command in your Raspberry Pi:
 
-     curl https://raw.githubusercontent.com/aikoncwd/rpi-benchmark/master/rpi-benchmark.sh | sudo bash
+     curl -L http://bit.ly/1Vm2eHP | sudo bash
