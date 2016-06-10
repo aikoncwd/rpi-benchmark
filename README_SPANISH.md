@@ -4,7 +4,7 @@
 
 <p align="center">Copia y pega el siguiente comando en la consola/terminal de tu Raspberry Pi:</p>
 
-     curl -L http://bit.ly/1Vm2eHP | sudo bash
+     curl -L https://raw.githubusercontent.com/aikoncwd/rpi-benchmark/master/rpi-benchmark.sh | sudo bash
 
 ## Información
 
@@ -27,7 +27,7 @@ El script rpi-benchmark mostrará al inicio la actual configuración de hardware
 No necesitas descargar ni compilar código... Es muy fácil!
 Simplemente copia el siguiente comando en la consola/terminal de tu Raspberry Pi:
 
-     curl -L http://bit.ly/1Vm2eHP | sudo bash
+     curl -L https://raw.githubusercontent.com/aikoncwd/rpi-benchmark/master/rpi-benchmark.sh | sudo bash
 
 El script rpi-benchmark empezará automáticamente en 2 segundos :relaxed:
 <br>
