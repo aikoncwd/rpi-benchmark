@@ -47,7 +47,7 @@ I strongly recommend to use some cooling on your RPi to avoid CPU throttling (at
 
 Edit your `/boot/config.txt` file and paste the following code, you can adjust values to get more or less overclock:
 
-    force_turbo=1                   #Enable cpu-overclock over 1300MHz (default 0)
+    force_turbo=0                   #Enable cpu-overclock over 1300MHz (default 0)
     avoid_pwm_pll=1                 #Enable no-relative freq between cpu and gpu cores (default 0)
     
     arm_freq=1300                   #Frequency of ARM processor core in MHz (default 1200)
