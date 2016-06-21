@@ -46,7 +46,7 @@ Recomiendo encarecidamente que utilices algñun método de ventilación/refriger
 
 Edita tu fichero `/boot/config.txt` y pega el siguiente código, puedes ajustar los valores para tener más o menos overclock:
 
-    force_turbo=1                   #Enable cpu-overclock over 1300MHz (default 0)
+    force_turbo=0                   #Enable cpu-overclock over 1300MHz (default 0)
     avoid_pwm_pll=1                 #Enable no-relative freq between cpu and gpu cores (default 0)
     
     arm_freq=1300                   #Frequency of ARM processor core in MHz (default 1200)
