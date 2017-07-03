@@ -1,0 +1,8 @@
+title: Rpi-benchmark
+description: Script to run some benchmark test for Raspberry Pi
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions
