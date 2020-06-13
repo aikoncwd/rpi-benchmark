@@ -33,9 +33,17 @@ printf "sd_clock="
 grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
 echo -e "\n\e[93m"
 
-echo -e "Running InternetSpeed test...\e[94m"
-speedtest-cli --simple
-echo -e "\e[93m"
+case $1 in
+    --no-speedtest|-ns )
+        echo "Skipping speed test"
+        echo
+        ;;
+    * )
+        echo -e "Running InternetSpeed test...\e[94m"
+        speedtest-cli --simple
+        echo -e "\e[93m"
+        ;;
+esac
 
 echo -e "Running CPU test...\e[94m"
 sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
