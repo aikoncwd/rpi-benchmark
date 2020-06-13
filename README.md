@@ -32,6 +32,10 @@ Just copy and paste the following command in your Raspberry Pi console:
 
 The rpi-benchmark script will start in 2 seconds :relaxed:
 <br>
+If you want to run this without the Internet Speed Test being run, then use:
+
+     curl -L https://raw.githubusercontent.com/aikoncwd/rpi-benchmark/master/rpi-benchmark.sh | sudo bash -s -- --no-speedtest
+
 <br>
 <br>
 ## Overclocking
