@@ -13,6 +13,9 @@ if [ ! `which speedtest-cli` ]; then
   apt-get install -y speedtest-cli
 fi
 
+# Get root disk for hdparam test
+ROOTDISK=`mount | grep " on / type" | cut -f 1 -d " "`
+
 # Script start!
 clear
 sync
@@ -50,7 +53,7 @@ vcgencmd measure_temp
 echo -e "\e[93m"
 
 echo -e "Running HDPARM test...\e[94m"
-hdparm -t /dev/mmcblk0 | grep Timing
+hdparm -t ${ROOTDISK} | grep Timing
 vcgencmd measure_temp
 echo -e "\e[93m"
 
