@@ -9,9 +9,19 @@ fi
 if [ ! `which sysbench` ]; then
   apt-get install -y sysbench
 fi
-if [ ! `which speedtest-cli` ]; then
-  apt-get install -y speedtest-cli
-fi
+
+# Skip the speed test if the user doesn't want it to run
+case $1 in
+    --no-speedtest|-ns )
+        echo "Skipping speed test"
+        echo
+        ;;
+    * )
+        if [ ! `which speedtest-cli` ]; then
+          apt-get install -y speedtest-cli
+        fi
+        ;;
+esac
 
 # Get root disk for hdparam test
 ROOTDISK=`mount | grep " on / type" | cut -f 1 -d " "`
@@ -33,6 +43,7 @@ printf "sd_clock="
 grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
 echo -e "\n\e[93m"
 
+# Skip the speed test if the user doesn't want it to run
 case $1 in
     --no-speedtest|-ns )
         echo "Skipping speed test"
