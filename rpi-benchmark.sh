@@ -52,7 +52,7 @@ sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --me
 vcgencmd measure_temp
 echo -e "\e[93m"
 
-echo -e "Running HDPARM test...\e[94m"
+echo -e "Running HDPARM test on ${ROOTDISK}...\e[94m"
 hdparm -t ${ROOTDISK} | grep Timing
 vcgencmd measure_temp
 echo -e "\e[93m"
