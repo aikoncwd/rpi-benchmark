@@ -17,7 +17,7 @@ case $1 in
         echo
         ;;
     * )
-        if [ ! `which speedtest-cli` ]; then
+        if [ ! `which speedtest-cli` ] && [ ! `which speedtest` ]; then
           apt-get install -y speedtest-cli
         fi
         ;;
@@ -50,10 +50,22 @@ case $1 in
         echo
         ;;
     * )
-        echo -e "Running InternetSpeed test...\e[94m"
-        speedtest-cli --simple
-        echo -e "\e[93m"
-        ;;
+	# Identify the installed version of speedtest
+	SPEEDTEST=``
+	if [ `which speedtest` ]; then
+		SPEEDTEST="$(which speedtest) --progress=yes"
+	elif [ `which speedtest-cli` ]; then
+		SPEEDTEST="$(which speedtest-cli) --simple"
+	else
+		echo -e "Failed to identify installed speedtest software\e[94m"
+	fi
+	if [ ! -z "$SPEEDTEST" ]; then
+		echo -e "Internet connection speed test will proceed with $SPEEDTEST\e[94m"
+        	echo -e "Running InternetSpeed test...\e[94m"
+		eval $SPEEDTEST
+        	echo -e "\e[93m"
+	fi
+	;;
 esac
 
 echo -e "Running CPU test...\e[94m"
