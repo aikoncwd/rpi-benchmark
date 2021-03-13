@@ -9,9 +9,22 @@ fi
 if [ ! `which sysbench` ]; then
   apt-get install -y sysbench
 fi
-if [ ! `which speedtest-cli` ]; then
-  apt-get install -y speedtest-cli
-fi
+
+# Skip the speed test if the user doesn't want it to run
+case $1 in
+    --no-speedtest|-ns )
+        echo "Skipping speed test"
+        echo
+        ;;
+    * )
+        if [ ! `which speedtest-cli` ] && [ ! `which speedtest` ]; then
+          apt-get install -y speedtest-cli
+        fi
+        ;;
+esac
+
+# Get root disk for hdparam test
+ROOTDISK=`mount | grep " on / type" | cut -f 1 -d " "`
 
 # Script start!
 clear
@@ -30,9 +43,30 @@ printf "sd_clock="
 grep "actual clock" /sys/kernel/debug/mmc0/ios 2>/dev/null | awk '{printf("%0.3f MHz", $3/1000000)}'
 echo -e "\n\e[93m"
 
-echo -e "Running InternetSpeed test...\e[94m"
-speedtest-cli --simple
-echo -e "\e[93m"
+# Skip the speed test if the user doesn't want it to run
+case $1 in
+    --no-speedtest|-ns )
+        echo "Skipping speed test"
+        echo
+        ;;
+    * )
+	# Identify the installed version of speedtest
+	SPEEDTEST=``
+	if [ `which speedtest` ]; then
+		SPEEDTEST="$(which speedtest) --progress=yes"
+	elif [ `which speedtest-cli` ]; then
+		SPEEDTEST="$(which speedtest-cli) --simple"
+	else
+		echo -e "Failed to identify installed speedtest software\e[94m"
+	fi
+	if [ ! -z "$SPEEDTEST" ]; then
+		echo -e "Internet connection speed test will proceed with $SPEEDTEST\e[94m"
+        	echo -e "Running InternetSpeed test...\e[94m"
+		eval $SPEEDTEST
+        	echo -e "\e[93m"
+	fi
+	;;
+esac
 
 echo -e "Running CPU test...\e[94m"
 sysbench --num-threads=4 --validate=on --test=cpu --cpu-max-prime=5000 run | grep 'total time:\|min:\|avg:\|max:' | tr -s [:space:]
@@ -49,8 +83,8 @@ sysbench --num-threads=4 --validate=on --test=memory --memory-block-size=1K --me
 vcgencmd measure_temp
 echo -e "\e[93m"
 
-echo -e "Running HDPARM test...\e[94m"
-hdparm -t /dev/mmcblk0 | grep Timing
+echo -e "Running HDPARM test on ${ROOTDISK}...\e[94m"
+hdparm -t ${ROOTDISK} | grep Timing
 vcgencmd measure_temp
 echo -e "\e[93m"
 

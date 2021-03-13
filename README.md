@@ -32,9 +32,15 @@ Just copy and paste the following command in your Raspberry Pi console:
 
 The rpi-benchmark script will start in 2 seconds :relaxed:
 <br>
+If you want to run this without the Internet Speed Test being run, then use:
+
+     curl -L https://raw.githubusercontent.com/aikoncwd/rpi-benchmark/master/rpi-benchmark.sh | sudo bash -s -- --no-speedtest
+
 <br>
 <br>
+
 ## Overclocking
+
 ### I want better results, can I overclock my RPi?
 
 Yes, overclocking your RPi will give you more power for your **CPU calculations**, more speed while read/write into your **memory ram** and better speeds while read/write into your microSD card.  
@@ -43,6 +49,7 @@ If you use your RPi as a MediaCenter with Kodi or to play games with RetroPie, y
 I strongly recommend to use some cooling on your RPi to avoid CPU throttling (at 85ºC)
 <br>
 <br>
+
 ##### Raspberry Pi 3: Overclock settings
 
 Edit your `/boot/config.txt` file and paste the following code, you can adjust values to get more or less overclock:
@@ -75,6 +82,7 @@ Edit your `/boot/config.txt` file and paste the following code, you can adjust v
     start_x=1                       #Enable software decoding (MPEG-2, VC-1, VP6, VP8, Theora, etc)
     overscan_scale=1                #Respect the overscan settings with the use of an LCD display
 <br>
+
 ##### Raspberry Pi 2: Overclock settings
 
 Edit your `/boot/config.txt` file and paste the following code, you can adjust values to get more or less overclock:
